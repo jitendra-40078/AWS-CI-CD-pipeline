@@ -9,17 +9,20 @@ phases:
   install:
     runtime-versions:
       python: 3.11
+
   pre_build:
     commands:
       - echo "Installing dependencies..."
       - pip install -r requirements.txt
+
   build:
     commands:
       - echo "Running tests..."
       - echo "Building Docker image..."
-      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
-      - docker build -t mydockerregistry/simple-python-flask-app:latest .
-      - docker push mydockerregistry/simple-python-flask-app:latest
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin docker.io
+      - docker build -t jitendra222/aws-cicd-python-flask:latest .
+      - docker push jitendra222/aws-cicd-python-flask:latest
+
   post_build:
     commands:
       - echo "Build completed successfully!"
